@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Survival Strategy</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle, #111 0%, #222 100%);
+      color: white;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .counter {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      border: 3px solid white;
+      border-radius: 20px;
+      padding: 20px;
+      width: 400px;
+      max-width: 90%;
+      text-align: left;
+      backdrop-filter: blur(6px);
+    }
+
+    .prompt {
+      color: yellow;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: none;
+      outline: none;
+    }
+
+    .char-count {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      background: #333;
+      color: white;
+      border: 2px solid white;
+      padding: 10px 20px;
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="counter" id="timer">59</div>
+
+  <div class="container">
+    <div class="prompt" id="displayName">Someone tries to...</div>
+    <textarea id="inputBox" maxlength="140" placeholder="Type your action..."></textarea>
+    <div class="char-count" id="charCount">0/140</div>
+  </div>
+
+  <button onclick="submitAction()">Confirm</button>
+
+  <script>
+    // Countdown timer
+    let timeLeft = 59;
+    const timer = document.getElementById("timer");
+    timer.textContent = timeLeft;
+
+    const countdown = setInterval(() => {
+      timeLeft--;
+      if (timeLeft >= 0) {
+        timer.textContent = timeLeft;
+      } else {
+        clearInterval(countdown);
+        timer.textContent = "0";
+      }
+    }, 1000);
+
+    // Character counter
+    const inputBox = document.getElementById("inputBox");
+    const charCount = document.getElementById("charCount");
+    inputBox.addEventListener("input", () => {
+      charCount.textContent = `${inputBox.value.length}/140`;
+    });
+
+    // Replace 'Someone' with name from localStorage
+    const name = localStorage.getItem('userName') || 'Someone';
+    const display = document.getElementById('displayName');
+    display.textContent = `${name} tries to...`;
+
+    // Confirm button logic
+    function submitAction() {
+      const userText = inputBox.value.trim();
+      if (userText.length === 0) {
+        alert("Please type something.");
+        return;
+      }
+      localStorage.setItem('userAction', userText);
+      window.location.href = "public/lastpage.html";
+    }
+  </script>
+
+</body>
+</html>

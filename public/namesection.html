@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Name Input Box</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+    video#bgVideo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container > div {
+      background: rgba(0, 0, 0, 0.5);
+      border: 3px solid white;
+      border-radius: 15px;
+      padding: 30px;
+      width: 300px;
+      position: relative;
+    }
+    .label {
+      position: absolute;
+      top: -15px;
+      left: 15px;
+      padding: 0 10px;
+      color: gold;
+      font-weight: bold;
+      font-size: 16px;
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 5px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      outline: none;
+    }
+    input[type="text"]::placeholder {
+      color: #ccc;
+    }
+    .char-count {
+      text-align: right;
+      color: white;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    .button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      cursor: not-allowed;
+    }
+    .button.enabled {
+      background-color: #ffcc00;
+      color: black;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <video id="bgVideo" autoplay muted loop>
+    <source src="video/background.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="container">
+    <div>
+      <div class="label">Enter your name</div>
+      <input type="text" id="nameInput" placeholder="Your name..." maxlength="15">
+      <div class="char-count"><span id="charCount">0</span>/15</div>
+      <button class="button" id="confirmBtn" disabled>Confirm</button>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById('nameInput');
+    const charCount = document.getElementById('charCount');
+    const button = document.getElementById('confirmBtn');
+
+    input.addEventListener('input', () => {
+      const length = input.value.length;
+      charCount.textContent = length;
+      if (length > 0) {
+        button.disabled = false;
+        button.classList.add('enabled');
+      } else {
+        button.disabled = true;
+        button.classList.remove('enabled');
+      }
+    });
+
+    button.addEventListener('click', () => {
+      if (!button.disabled) {
+        const name = input.value.trim();
+        localStorage.setItem('userName', name);  // Save to localStorage
+        window.location.href = 'scenario.html';  // Go to the next page
+      }
+    });
+  </script>
+
+</body>
+</html>

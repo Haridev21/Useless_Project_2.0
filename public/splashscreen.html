@@ -1,0 +1,93 @@
+<!DOCTYPE html> 
+<html lang="ml">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Splash Screen</title>
+  <!-- Malayalam Stylish Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+    }
+
+    .splash-container {
+      background-image: url('assets/splashscreen.png');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .splash-text {
+      font-family: 'Baloo Chettan 2', cursive;
+      font-size: 5rem;
+      font-weight: bold;
+      color: white;
+      text-align: center;
+      text-shadow: 3px 3px 8px #000;
+      transform: skew(-10deg);
+      opacity: 0;
+      animation: fadeInUp 2s ease-out forwards, glow 2.5s ease-in-out infinite;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px) skew(-10deg);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) skew(-10deg);
+      }
+    }
+
+    @keyframes glow {
+      0%, 100% {
+        text-shadow: 3px 3px 8px #000, 0 0 10px #fff, 0 0 20px #f0f, 0 0 30px #f0f;
+      }
+      50% {
+        text-shadow: 3px 3px 8px #000, 0 0 15px #fff, 0 0 25px #f0f, 0 0 35px #f0f;
+      }
+    }
+
+    .loader {
+      margin-top: 30px;
+      width: 50px;
+      height: 50px;
+      border: 6px solid #fff;
+      border-top: 6px solid #f0f;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <script>
+    // Redirect after 3 seconds
+    setTimeout(function() {
+      window.location.href = "homescreen.html"; // Replace with your actual file
+    }, 3000);
+  </script>
+</head>
+<body>
+  <div class="splash-container">
+    <div class="splash-text">അതിജീവനം</div>
+    <div class="loader"></div>
+  </div>
+</body>
+</html>

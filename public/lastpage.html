@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Game Scene</title>
+  <style>
+    :root {
+      --color-bg-light: #f0f0f0;
+      --color-bg-dark: #b0b0b0;
+      --color-text: #333;
+      --color-ui-bg: #fff;
+      --color-ui-border: #333;
+      --color-button: #000;
+      --color-button-text: #fff;
+      --color-robot-tertiary: #4a4a4a;
+      --color-accent-1: #ff00ff;
+      --color-accent-2: #00ffff;
+      --color-accent-3: #00ff00;
+      --color-accent-4: #ff0000;
+      --color-lightning: #ffcc00;
+      --font-main: 'VT323', monospace;
+      --font-title: 'Press Start 2P', cursive;
+      --dialog-width: 450px;
+      --border-width: 4px;
+      --shadow-offset: 8px;
+      --anim-duration-spin: 20s;
+      --anim-duration-pulse: 1.5s;
+      --anim-duration-float: 3s;
+      --anim-duration-flash: 0.5s;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: var(--font-main);
+      overflow: hidden;
+      color: var(--color-text);
+    }
+
+    .scene-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1200px;
+      perspective-origin: 50% 50%;
+      background: linear-gradient(135deg, var(--color-bg-light), var(--color-bg-dark));
+    }
+
+    .background-effect {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 150%;
+      height: 150%;
+      background: 
+        radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 10%),
+        radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 10%);
+      background-size: 200px 200px;
+      transform: translate3d(-50%, -50%, -500px);
+      animation: spiral-spin var(--anim-duration-spin) linear infinite;
+    }
+
+    @keyframes spiral-spin {
+      from { transform: translate3d(-50%, -50%, -500px) rotate(0deg); }
+      to { transform: translate3d(-50%, -50%, -500px) rotate(360deg); }
+    }
+
+    .ui-box {
+      background-color: var(--color-ui-bg);
+      border: var(--border-width) solid var(--color-ui-border);
+      border-radius: 12px;
+      box-shadow: var(--shadow-offset) var(--shadow-offset) 0px #000;
+      padding: 20px;
+      position: absolute;
+      z-index: 10;
+    }
+
+    .dialog-box {
+      width: var(--dialog-width);
+      height: 150px;
+      overflow: hidden;
+      bottom: 25%;
+      left: 5%;
+      font-size: 1.5em;
+      line-height: 1.4;
+      letter-spacing: 1px;
+      transform: rotateY(-10deg) rotateX(5deg) translateZ(50px);
+      transform-origin: bottom left;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .info-panel {
+      width: 250px;
+      height: 150px;
+      background: var(--color-robot-tertiary);
+      color: #fff;
+      padding: 15px;
+      font-size: 1.5em;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      border: var(--border-width) solid var(--color-button);
+      border-radius: 10px;
+      box-shadow: 6px 6px 0px var(--color-button);
+      top: 15%;
+      right: 15%;
+      transform: rotateY(15deg) rotateX(-5deg) translateZ(75px);
+      transform-origin: top right;
+    }
+
+    .continue-button {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%) translateZ(150px);
+      background-color: var(--color-button);
+      color: var(--color-button-text);
+      font-family: var(--font-title);
+      padding: 15px 40px;
+      font-size: 1em;
+      border: none;
+      cursor: pointer;
+      box-shadow: 4px 4px 0px var(--color-ui-bg);
+      transition: transform 0.1s, box-shadow 0.1s;
+      z-index: 20;
+    }
+
+    .continue-button:hover {
+      transform: translateX(-50%) translateZ(150px) scale(1.05);
+      box-shadow: 6px 6px 0px var(--color-ui-bg);
+    }
+
+    .character-icon {
+      position: absolute;
+      top: 10%;
+      left: 10%;
+      width: 70px;
+      height: 70px;
+      background-color: white;
+      border-radius: 50%;
+      border: var(--border-width) solid var(--color-ui-border);
+      box-shadow: 4px 4px 0px #000;
+      z-index: 10;
+      animation: bounce var(--anim-duration-float) ease-in-out infinite;
+      transform: translateZ(100px);
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateZ(100px) translateY(0); }
+      50% { transform: translateZ(100px) translateY(-15px); }
+    }
+
+    .robot-image {
+      position: absolute;
+      bottom: 0;
+      right: 15%;
+      transform: scale(0.85) translateZ(10px);
+      transform-origin: bottom center;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+      width: 220px;
+      height: auto;
+      z-index: 10;
+    }
+
+    .logo-text {
+      position: absolute;
+      bottom: 5%;
+      left: 5%;
+      font-family: var(--font-title);
+      font-size: 1.2em;
+      color: #000;
+      opacity: 0.1;
+      letter-spacing: 2px;
+    }
+
+    .lightning-effect {
+      position: absolute;
+      bottom: 28%;
+      left: 45%;
+      width: 5px;
+      height: 150px;
+      background: linear-gradient(to bottom, transparent, var(--color-lightning), transparent);
+      transform: rotate(-25deg);
+      z-index: 8;
+      animation: lightning-strike var(--anim-duration-flash) steps(1, end) infinite;
+    }
+
+    @keyframes lightning-strike {
+      0% { opacity: 0; transform: scaleY(0.5) rotate(-25deg); }
+      50% { opacity: 1; transform: scaleY(1) rotate(-25deg); }
+      100% { opacity: 0; transform: scaleY(0.5) rotate(-25deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scene-container">
+    <div class="background-effect"></div>
+
+    <div class="character-icon"></div>
+
+    <div class="ui-box dialog-box">
+      Loading AI response...
+    </div>
+
+    <img src="/assets/snape2.png" class="robot-image" alt="Custom Character">
+
+    <div class="ui-box info-panel">
+      sdsd tries to...<br>
+      wewe
+    </div>
+
+    <div class="lightning-effect"></div>
+
+    <button class="continue-button">
+      CONTINUE >>
+    </button>
+  </div>
+
+  <script>
+    const userName = localStorage.getItem('userName');
+    const userAction = localStorage.getItem('userAction');
+    const selectedScenario = localStorage.getItem('selectedScenario');
+
+    let sentences = [];
+    let currentIndex = 0;
+
+    const dialogBox = document.querySelector('.dialog-box');
+    const infoPanel = document.querySelector('.info-panel');
+    const continueButton = document.querySelector('.continue-button');
+
+    async function fetchAIResponse() {
+      try {
+        const prompt = `Create a vivid and dramatic survival scenario based on the details below. Build a realistic setting and context around the action, describe the obstacles faced, the choices made, and the consequences. At the end of the story, clearly state whether the person survived or not, and explain how they survived (or why they didn't).
+        Name: ${userName}
+        Action: ${userAction}
+        Only return the full story with the survival outcome at the end.`;
+
+        const response = await fetch('/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [
+              {
+                parts: [{ text: prompt }],
+                role: "user"
+              }
+            ]
+          })
+        });
+
+        const data = await response.json();
+        const aiText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ AI response unavailable.";
+
+        // Split into sentences using regex
+        sentences = aiText.match(/[^.!?]+[.!?]+/g) || [aiText];
+        currentIndex = 0;
+
+        dialogBox.innerHTML = sentences[currentIndex] || "⚠️ No response.";
+        if (infoPanel && userName) {
+          infoPanel.innerHTML = infoPanel.innerHTML.replace(/sdsd/g, userName);
+        }
+
+      } catch (error) {
+        console.error("❌ Failed to get AI response:", error);
+        dialogBox.innerHTML = "⚠️ Error loading response.";
+      }
+    }
+
+    continueButton.addEventListener('click', () => {
+      currentIndex++;
+      if (currentIndex < sentences.length) {
+        dialogBox.innerHTML = sentences[currentIndex];
+      } else {
+        dialogBox.innerHTML = "<i>End of story.</i>";
+      }
+    });
+
+    fetchAIResponse();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Death By AI</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+Malayalam:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #5a208f;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .malayalam-font {
+      font-family: 'Noto Sans Malayalam', sans-serif;
+    }
+
+    .speech-bubble {
+      position: relative;
+      background: #fff;
+      border-radius: 1rem;
+      padding: 1rem;
+      color: #333;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .speech-bubble:after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 15px solid #fff;
+    }
+
+    .speech-bubble.right:after {
+      left: auto;
+      right: 20px;
+      top: 100%;
+      transform: translateX(0);
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-top: 15px solid #fff;
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body class="flex flex-col min-h-screen bg-gradient-to-br from-purple-700 to-indigo-900">
+
+  <!-- Background Music -->
+  <audio id="bg-music" autoplay loop>
+    <source src="music/pinksolider.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <header class="w-full p-4 flex flex-col items-center justify-center z-10">
+    <h1 class="text-6xl md:text-8xl font-bold text-white malayalam-font text-center">
+      അതിജീവനം
+    </h1>
+    <p class="text-xl md:text-2xl mt-2 malayalam-font italic text-white">
+      ഉത്സാഹിക്കു അതിജീവിക്കു
+    </p>
+  </header>
+
+  <main class="flex-grow flex flex-col md:flex-row items-center justify-center p-4 gap-8 md:gap-16 lg:gap-24 relative z-0">
+
+    <!-- Left Section -->
+    <div class="bg-white bg-opacity-20 backdrop-filter backdrop-blur-sm p-6 rounded-3xl shadow-xl flex flex-col items-center w-72 md:w-80 lg:w-96 text-center border-2 border-white border-opacity-30">
+      <h3 class="text-2xl font-bold mb-4 text-white">How to play</h3>
+      <div class="bg-black rounded-full w-32 h-32 flex items-center justify-center mb-4">
+        <svg class="w-20 h-20 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM9.5 9.5c.83 0 1.5-.67 1.5-1.5S10.33 6.5 9.5 6.5 8 7.17 8 8s.67 1.5 1.5 1.5zm5 0c.83 0 1.5-.67 1.5-1.5S15.33 6.5 14.5 6.5 13 7.17 13 8s.67 1.5 1.5 1.5zM12 17c-2.33 0-4.31-1.46-5.18-3.5h10.36c-.87 2.04-2.85 3.5-5.18 3.5z"/>
+        </svg>
+      </div>
+      <p class="text-4xl font-extrabold text-white mb-2">5. WIN</p>
+      <p class="text-sm text-gray-300">The player with the least deaths after 5 rounds, wins!</p>
+      <div class="flex space-x-2 mt-4">
+        <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+        <div class="w-3 h-3 bg-white rounded-full"></div>
+        <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+        <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+        <div class="w-3 h-3 bg-white rounded-full opacity-50"></div>
+      </div>
+    </div>
+
+    <!-- Center Section -->
+    <div class="flex flex-col items-center relative -mt-16 md:mt-0">
+      <div class="w-80 h-80 md:w-96 md:h-96 bg-gray-300 rounded-full flex items-center justify-center overflow-hidden shadow-2xl border-4 border-white border-opacity-50">
+        <video 
+          class="w-full h-full object-cover rounded-full" 
+          autoplay 
+          loop 
+          muted 
+          playsinline
+        >
+          <source src="video/doll.png.mp4" type="video/mp4" />
+         
+        </video>
+      </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class="flex flex-col items-center text-center gap-6">
+      <div class="speech-bubble right bg-white text-gray-800 p-4 rounded-xl shadow-lg max-w-xs">
+        <p class="font-semibold text-lg">CAN YOU SURVIVE MY JUDGEMENT AND CHEAT DEATH?</p>
+      </div>
+      <div class="bg-gray-800 rounded-full w-24 h-24 flex items-center justify-center mb-4 shadow-lg">
+        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 1C8.13 1 5 4.13 5 8v6h2V8c0-2.76 2.24-5 5-5s5 2.24 5 5v6h2V8c0-3.87-3.13-7-7-7zm-1 10H8V9h3v2zm5 0h-3V9h3v2zM12 15c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm-5 0H5v-2h2v2zM17 15h-2v-2h2v2z"/>
+        </svg>
+      </div>
+      <a href="namesection.html" class="bg-white text-purple-700 px-10 py-4 rounded-2xl font-bold text-xl shadow-lg hover:bg-gray-100 transition-colors w-64 text-center">
+  Start
+</a>
+
+      
+      <p class="text-sm text-gray-300 mt-2 flex items-center">
+        
+        <svg class="w-4 h-4 ml-1 transform rotate-45" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M19 12h-6V6h-2v6H5v2h6v6h2v-6h6z"/>
+        </svg>
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer Section 
+  <footer class="w-full p-4 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm mt-auto z-10">
+    <button class="bg-gray-700 text-white px-4 py-2 rounded-xl flex items-center gap-2 mb-4 md:mb-0 hover:bg-gray-600 transition-colors">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M17.8 11.5c.2-1.3-.3-2.6-1.3-3.5C15.5 7 14.2 6.5 12.8 6.7c-1.3.2-2.6.7-3.5 1.7-.9 1-1.4 2.3-1.3 3.6.1 1.3.6 2.6 1.6 3.5.9.9 2.2 1.4 3.6 1.3 1.3-.1 2.6-.6 3.5-1.6.9-.9 1.4-2.2 1.3-3.5zm-2.8 0c0 .7-.3 1.3-.8 1.8-.5.5-1.1.8-1.8.8-.7 0-1.3-.3-1.8-.8-.5-.5-.8-1.1-.8-1.8 0-.7.3-1.3.8-1.8.5-.5 1.1-.8 1.8-.8.7 0 1.3.3 1.8.8.5.5.8 1.1.8 1.8zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+      </svg>
+      Download on the App Store
+    </button>
+    <div class="flex gap-4">
+      <a href="#" class="hover:text-white transition-colors">TERMS</a>
+      <a href="#" class="hover:text-white transition-colors">playroom</a>
+    </div>
+  </footer>-->
+
+  <!-- JS to handle autoplay block fallback -->
+  <script>
+    window.addEventListener("load", () => {
+      const audio = document.getElementById("bg-music");
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          document.body.addEventListener("click", () => {
+            audio.play();
+          }, { once: true });
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

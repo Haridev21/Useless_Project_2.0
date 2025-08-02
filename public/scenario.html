@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scenario Confirmation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Courier New', Courier, monospace;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+      background: url('assets/plane.jpeg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .content-box {
+      background-color: transparent;
+      padding: 40px 20px;
+      border-radius: 12px;
+      max-width: 700px;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+
+    .scenario {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: rgb(251, 251, 251);
+    }
+
+    .icons {
+      margin-bottom: 30px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      font-size: 26px;
+      color: white;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    .icon-btn:hover {
+      color: #ffcc00;
+    }
+
+    .accept-btn {
+      background-color: #ffcc00;
+      color: black;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .accept-btn:hover {
+      background-color: #e6b800;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Music -->
+  <audio autoplay loop hidden>
+    <source src="music/m1.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="content-box">
+      <h2>Confirm your scenario</h2>
+      <div class="scenario" id="scenarioText">
+        <!-- Scenario will be inserted here -->
+      </div>
+      <div class="icons">
+        <button class="icon-btn" onclick="nextScenario()">🔄</button>
+      </div>
+      <button class="accept-btn" onclick="acceptScenario()">Accept</button>
+    </div>
+  </div>
+
+  <script>
+    const scenarios = [
+      "Zombies have invaded your world. You are the last human left. How will you survive?",
+      "You are falling off a plane without any parachute. You have a few seconds left before you smash onto the ground. How will you survive?",
+      "The whole ecosystem has inverted. All plants and animals around you have evolved aggressive traits. They will devour you on sight. How will you survive?",
+      "You woke up to find a time bomb strapped to your body. You have only 10 seconds before the bomb explodes. How will you survive?",
+      "Your arms and legs are tied and you are dropped into the sea with a heavy weight tied to your legs. How will you survive?",
+      "You woke up in a closed room and the walls around you started closing in. You are going to get crushed by the walls unless you act swiftly. How will you survive?"
+    ];
+
+    let index = 0;
+
+    function showScenario(i) {
+      document.getElementById("scenarioText").textContent = scenarios[i];
+    }
+
+    function nextScenario() {
+      index = (index + 1) % scenarios.length;
+      showScenario(index);
+    }
+
+    function acceptScenario() {
+      const selectedScenario = scenarios[index];
+      localStorage.setItem('selectedScenario', selectedScenario); // ✅ Save to localStorage
+      const encoded = encodeURIComponent(selectedScenario);
+      window.location.href = `scenariosplash.html?scenario=${encoded}`;
+    }
+
+    window.onload = () => {
+      showScenario(index);
+    };
+  </script>
+</body>
+</html>

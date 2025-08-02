@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scenario Animation</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', monospace;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    .text {
+      position: absolute;
+      font-size: 2em;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .animate {
+      animation: floatUp 2s forwards;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-80px);
+        opacity: 0;
+      }
+    }
+
+    #prompt {
+      font-size: 1.5em;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="text1" class="text">Scenario Incoming</div>
+  <div id="text2" class="text">Get Ready</div>
+  <div id="prompt">Prompt: <span id="displayScenario">Loading...</span></div>
+
+  <script>
+    const text1 = document.getElementById("text1");
+    const text2 = document.getElementById("text2");
+    const prompt = document.getElementById("prompt");
+
+    // Show text1
+    setTimeout(() => {
+      text1.style.opacity = 1;
+    }, 500);
+
+    // Animate text1
+    setTimeout(() => {
+      text1.classList.add("animate");
+    }, 2500);
+
+    // Show text2
+    setTimeout(() => {
+      text2.style.opacity = 1;
+    }, 3000);
+
+    // Animate text2
+    setTimeout(() => {
+      text2.classList.add("animate");
+    }, 5000);
+
+    // Show prompt
+    setTimeout(() => {
+      prompt.style.display = "block";
+    }, 5500);
+
+    // Redirect to next.html after 2 seconds of showing prompt
+    setTimeout(() => {
+      window.location.href = "userinput.html";
+    }, 7500);
+
+    // Load scenario from URL
+    const params = new URLSearchParams(window.location.search);
+    const scenario = params.get("scenario");
+    document.getElementById("displayScenario").textContent =
+      scenario ? decodeURIComponent(scenario) : "No scenario received.";
+  </script>
+</body>
+</html>
