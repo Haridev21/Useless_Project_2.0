@@ -68,6 +68,14 @@ We solved this very fictional, extremely unnecessary problem with **അതിജ
 Make sure you have Python and `pip` installed.
 
 # Screenshots
+<img src="images/splashscreen.png"  width="400" height="300">
+<img src="images/homescreen.png"  width="400" height="300">
+<img src="images/nameselection.png"  width="400" height="300">
+<img src="images/scenario.png"  width="400" height="300">
+<img src="images/Survival_Strategy.png"  width="400" height="300">
+<img src="images/LAST.png"  width="400" height="300">
+<img src="images/LAST (2).png"  width="400" height="300">
+
 ```bash
 pip install flask
 pip install google-generativeai
