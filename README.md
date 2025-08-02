@@ -68,13 +68,13 @@ We solved this very fictional, extremely unnecessary problem with **അതിജ
 Make sure you have Python and `pip` installed.
 
 # Screenshots
-<img src="images/splashscreen.png"  width="400" height="300">
-<img src="images/homescreen.png"  width="400" height="300">
-<img src="images/nameselection.png"  width="400" height="300">
-<img src="images/scenario.png"  width="400" height="300">
-<img src="images/Survival_Strategy.png"  width="400" height="300">
-<img src="images/LAST.png"  width="400" height="300">
-<img src="images/LAST (2).png"  width="400" height="300">
+<img src="images/splashscreen.png"  width="500" height="400">
+<img src="images/homescreen.png"  width="500" height="400">
+<img src="images/nameselection.png"  width="500" height="400">
+<img src="images/scenario.png"  width="500" height="400">
+<img src="images/Survival_Strategy.png"  width="500" height="400">
+<img src="images/LAST.png"  width="500" height="400">
+<img src="images/LAST (2).png"  width="500" height="400">
 
 ```bash
 pip install flask
