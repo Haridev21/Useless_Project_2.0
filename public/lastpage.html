@@ -238,10 +238,9 @@
 
     async function fetchAIResponse() {
       try {
-            const prompt = `Write a short, vivid survival story based on the following details. Set the scene quickly, highlight the main obstacle, the key decision, and its result. End with whether the person survived or not, and briefly explain how or why.
-            Name: ${userName}
-            Action: ${userAction}
-            Only return the short story with the survival outcome at the end.`;
+            const prompt = `Write a very short survival story in 4-5 lines. Set the scene quickly, show the main obstacle, a key decision, and the outcome. End with whether ${userName} survived or not, and a brief reason why. Only return the story, nothing else. Keep it concise and vivid.
+            Action: ${userAction}`;
+            //Only return the short story with the survival outcome at the end.`;
 
 
 
@@ -291,6 +290,7 @@
 
 </body>
 </html>
+
 
 
 
