@@ -15,7 +15,7 @@ app.use(express.static('public')); // Serve frontend
 
 // ✅ Root route (optional, helpful for Render)
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/public/splashscreen.html');
 });
 
 // Chat endpoint
@@ -45,4 +45,5 @@ app.post('/chat', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
+
 
