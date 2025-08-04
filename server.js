@@ -3,16 +3,19 @@ const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // ✅ Fix here
 
-// ⛔ Replace this with your actual Gemini API key (keep it private!)
 const API_KEY = 'AIzaSyC8PvH_kZapFCrJpVf9Lq6oKXyHYXTSl_w';
-//const MODEL = 'models/gemini-2.5-flash';
-const MODEL = 'gemini-1.5-flash'; // remove 'models/' prefix here
+const MODEL = 'gemini-1.5-flash';
 
 // Middleware
 app.use(bodyParser.json());
-app.use(express.static('public')); // Serve frontend from /public
+app.use(express.static('public')); // Serve frontend
+
+// ✅ Root route (optional, helpful for Render)
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 // Chat endpoint
 app.post('/chat', async (req, res) => {
