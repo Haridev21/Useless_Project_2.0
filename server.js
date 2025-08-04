@@ -1,6 +1,3 @@
-// Load environment variables from .env
-require('dotenv').config();
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const fetch = require('node-fetch');
@@ -22,7 +19,7 @@ app.get('/', (req, res) => {
 app.post('/chat', async (req, res) => {
   try {
     console.log("📩 Incoming request body:", JSON.stringify(req.body, null, 2));
-    console.log("🔑 API_KEY present:", !!API_KEY); // Just to confirm key presence
+    console.log("🔑 API_KEY present:", !!API_KEY);
 
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1/models/${MODEL}:generateContent?key=${API_KEY}`,
@@ -36,9 +33,7 @@ app.post('/chat', async (req, res) => {
     const data = await response.json();
     console.log("📤 Gemini API response:", JSON.stringify(data, null, 2));
 
-    if (
-      !data?.candidates?.[0]?.content?.parts?.[0]?.text
-    ) {
+    if (!data?.candidates?.[0]?.content?.parts?.[0]?.text) {
       return res.status(500).json({ error: "Incomplete Gemini response" });
     }
 
