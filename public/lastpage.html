@@ -238,10 +238,20 @@
 
     async function fetchAIResponse() {
       try {
-        const prompt = `Create a vivid and dramatic survival scenario based on the details below. Build a realistic setting and context around the action, describe the obstacles faced, the choices made, and the consequences. At the end of the story, clearly state whether the person survived or not, and explain how they survived (or why they didn't).
+       // const prompt = `Create a vivid and dramatic survival scenario based on the details below. Build a realistic setting and context around the action, describe the obstacles faced, the choices made, and the consequences. At the end of the story, clearly state whether the person survived or not, and explain how they survived (or why they didn't).
+       // Name: ${userName}
+       // Action: ${userAction}
+      //  Only return the full story with the survival outcome at the end.`;
+        const selectedScenario = document.getElementById('scenarioDropdown').value;
+        localStorage.setItem('selectedScenario', selectedScenario);
+
+         // You can then use it in your prompt like this:
+        const prompt = `Write a short, vivid survival story based on the following details. Set the scene quickly, highlight the main obstacle, the key decision, and its result. End with whether the person survived or not, and briefly explain how or why.
         Name: ${userName}
-        Action: ${userAction}
-        Only return the full story with the survival outcome at the end.`;
+        Scenario: ${selectedScenario}
+       Action: ${userAction}
+      Only return the short story with the survival outcome at the end.`;
+
 
         const response = await fetch('/chat', {
           method: 'POST',
@@ -288,3 +298,4 @@
 
 </body>
 </html>
+
