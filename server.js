@@ -5,7 +5,8 @@ const fetch = require('node-fetch');
 const app = express();
 const PORT = process.env.PORT || 3000; // ✅ Fix here
 
-const API_KEY = 'AIzaSyC8PvH_kZapFCrJpVf9Lq6oKXyHYXTSl_w';
+const API_KEY = process.env.API_KEY;
+
 const MODEL = 'gemini-1.5-flash';
 
 // Middleware
@@ -44,3 +45,4 @@ app.post('/chat', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
+
