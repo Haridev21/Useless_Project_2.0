@@ -239,8 +239,9 @@
 
     async function fetchAIResponse() {
       try {
-        const prompt = `Write a gripping, very short survival story in 10–25 lines. Set a harsh, unforgiving scene fast. Introduce a deadly obstacle that tests ${userName}'s limits. Show one critical, risky decision they make under extreme pressure. Conclude with whether ${userName} survived or not—and why. Be vivid, concise, and intense. Only return the story, nothing else.
-        Action: ${userAction}`;
+            const prompt = `Write an extremely intense, very short survival story in 10–25 lines. Drop ${userName} into a brutally hostile, nearly unsurvivable environment. Introduce a life-threatening obstacle that gives almost no chance of escape. Force ${userName} to make one desperate, high-risk decision with no clear outcome. End with whether they survived or not—and explain why in a single, sharp sentence. Be raw, vivid, and unforgiving. Only return the story, nothing else.
+            Action: ${userAction}`;
+
 
 
         const response = await fetch('/chat', {
@@ -293,5 +294,6 @@
 
 </body>
 </html>
+
 
 
