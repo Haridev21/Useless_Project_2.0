@@ -239,8 +239,9 @@
 
     async function fetchAIResponse() {
       try {
-        const prompt = `Write a very short survival story in 10-25 lines. Set the scene quickly, show the main obstacle, a key decision, and the outcome. End with whether ${userName} survived or not, and a brief reason why. Only return the story, nothing else. Keep it concise and vivid.
+        const prompt = `Write a gripping, very short survival story in 10–25 lines. Set a harsh, unforgiving scene fast. Introduce a deadly obstacle that tests ${userName}'s limits. Show one critical, risky decision they make under extreme pressure. Conclude with whether ${userName} survived or not—and why. Be vivid, concise, and intense. Only return the story, nothing else.
         Action: ${userAction}`;
+
 
         const response = await fetch('/chat', {
           method: 'POST',
@@ -292,4 +293,5 @@
 
 </body>
 </html>
+
 
