@@ -80,27 +80,23 @@
       z-index: 10;
     }
 
-  .dialog-box {
-    width: var(--dialog-width);
-    height: 150px;
-    overflow: hidden;
-    font-size: 1.5em;
-    line-height: 1.4;
-    letter-spacing: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  
-    /* Updated position */
-    position: absolute;
-    bottom: 35%;
-    left: 50%;
-    transform: translateX(-50%) translateZ(50px);
-    z-index: 10;
-  }
-
-
+    .dialog-box {
+      width: var(--dialog-width);
+      height: 150px;
+      overflow: hidden;
+      font-size: 1.5em;
+      line-height: 1.4;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: absolute;
+      bottom: 35%;
+      left: 50%;
+      transform: translateX(-50%) translateZ(50px);
+      z-index: 10;
+    }
 
     .info-panel {
       width: 250px;
@@ -243,12 +239,8 @@
 
     async function fetchAIResponse() {
       try {
-            const prompt = `Write a very short survival story in 10-25 lines. Set the scene quickly, show the main obstacle, a key decision, and the outcome. End with whether ${userName} survived or not, and a brief reason why. Only return the story, nothing else. Keep it concise and vivid.
-            Action: ${userAction}`;
-            //Only return the short story with the survival outcome at the end.`;
-
-
-
+        const prompt = `Write a very short survival story in 10-25 lines. Set the scene quickly, show the main obstacle, a key decision, and the outcome. End with whether ${userName} survived or not, and a brief reason why. Only return the story, nothing else. Keep it concise and vivid.
+        Action: ${userAction}`;
 
         const response = await fetch('/chat', {
           method: 'POST',
@@ -266,7 +258,6 @@
         const data = await response.json();
         const aiText = data?.candidates?.[0]?.content?.parts?.[0]?.text || "⚠️ AI response unavailable.";
 
-        // Split into sentences using regex
         sentences = aiText.match(/[^.!?]+[.!?]+/g) || [aiText];
         currentIndex = 0;
 
@@ -293,14 +284,11 @@
     fetchAIResponse();
   </script>
 
+  <!-- Background music -->
+  <audio autoplay loop hidden>
+    <source src="/assets/hp.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
